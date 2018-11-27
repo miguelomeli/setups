@@ -81,7 +81,7 @@ apt-get install -y supervisor
 
 print_bold "Creando Profile" "${bold}Instalando..."
 echo "" >>  ~/.bash_profile
-echo "hola" >>  ~/.bash_profile
+echo "alias ll='ls -l --color=auto'" >>  ~/.bash_profile
 
 
 print_bold "Mofificando /etc/ssh/ssh_config" "${bold}Instalando..."
