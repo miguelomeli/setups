@@ -1,0 +1,148 @@
+#!/bin/bash
+
+
+print_status() {
+    echo
+    echo "## $1"
+    echo
+}
+
+if test -t 1; then # if terminal
+    ncolors=$(which tput > /dev/null && tput colors) # supports color
+    if test -n "$ncolors" && test $ncolors -ge 8; then
+        termcols=$(tput cols)
+        bold="$(tput bold)"
+        underline="$(tput smul)"
+        standout="$(tput smso)"
+        normal="$(tput sgr0)"
+        black="$(tput setaf 0)"
+        red="$(tput setaf 1)"
+        green="$(tput setaf 2)"
+        yellow="$(tput setaf 3)"
+        blue="$(tput setaf 4)"
+        magenta="$(tput setaf 5)"
+        cyan="$(tput setaf 6)"
+        white="$(tput setaf 7)"
+    fi
+fi
+
+print_bold() {
+    title="$1"
+    text="$2"
+
+    echo
+    echo "${red}================================================================================${normal}"
+    echo "${red}================================================================================${normal}"
+    echo
+    echo -e "  ${bold}${yellow}${title}${normal}"
+    echo
+    echo -en "  ${text}"
+    echo
+    echo "${red}================================================================================${normal}"
+    echo "${red}================================================================================${normal}"
+}
+
+
+bail() {
+    echo 'Error executing command, exiting'
+    exit 1
+}
+
+exec_cmd_nobail() {
+    echo "+ $1"
+    bash -c "$1"
+}
+
+exec_cmd() {
+    exec_cmd_nobail "$1" || bail
+}
+
+
+
+
+print_bold "Actualizamos el Sistema" "${bold}Comando Update"
+exec_cmd 'apt-get update -y'
+
+print_bold "Actualizamos el Sistema" "${bold}Comando upgrade"
+exec_cmd 'apt-get upgrade -y'
+
+print_bold "Instalamos Librerias Necesarias" "${bold}Instalando..."
+sudo apt-get install -y nano curl git wget vnstat vnstati lsb-release zip cron sudo unzip nscd netcat software-properties-common
+
+print_bold "Instalamos Librerias Necesarias" "${bold}Instalando..."
+sudo apt-get install -y build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3 libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-test-dev libboost-thread-dev
+
+print_bold "Instalamos Librerias Necesarias" "${bold}Instalando..."
+sudo apt-get install -y libminiupnpc-dev libzmq3-dev libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler libqrencode-dev unzip
+
+print_bold "Instalamos Librerias Necesarias" "${bold}Instalando..."
+apt-get install -y supervisor  
+
+
+print_bold "Creando Profile" "${bold}Instalando..."
+echo "" >>  ~/.bash_profile
+echo "hola" >>  ~/.bash_profile
+
+
+print_bold "Mofificando /etc/ssh/ssh_config" "${bold}Instalando..."
+echo "" >>  /etc/ssh/ssh_config
+echo "" >>  /etc/ssh/ssh_config
+echo "Host *" >>  /etc/ssh/ssh_config
+echo "TCPKeepAlive yes" >>  /etc/ssh/ssh_config
+echo "ServerAliveInterval 20" >>  /etc/ssh/ssh_config
+echo "" >>  /etc/ssh/ssh_config
+
+
+print_bold "Mofificando /etc/ssh/sshd_config" "${bold}Instalando..."
+echo "" >>  /etc/ssh/sshd_config
+echo "" >>  /etc/ssh/sshd_config
+echo "TCPKeepAlive yes" >>  /etc/ssh/sshd_config
+echo "ClientAliveInterval 60" >>  /etc/ssh/sshd_config
+echo "" >>  /etc/ssh/sshd_config
+
+
+
+print_bold "Reiniciando SSH" "${bold}Instalando..."
+/etc/init.d/ssh restart
+
+
+
+print_bold "Instalando NodeJS" "${bold}Instalando..."
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
+ln -s /usr/bin/nodejs /usr/bin/node
+sudo apt-get install npm
+npm install forever --global
+npm install nodemon --global
+
+
+
+
+print_bold "Instalando AngularJS" "${bold}Instalando..."
+npm install -g @angular/cli
+
+
+
+
+print_bold "Instalando VueJS" "${bold}Instalando..."
+npm install -g @vue/cli
+npm install -g @vue/cli-service-global
+npm install -g @vue/cli-init
+
+
+
+
+print_bold "Instalando MongoDB" "${bold}Instalando..."
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+sudo apt update
+sudo apt install -y mongodb-org
+sudo systemctl start mongod.service
+sudo systemctl enable mongod.service
+
+
+
+
+
+
+
