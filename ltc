@@ -1,0 +1,100 @@
+#!/bin/bash
+
+
+print_status() {
+    echo
+    echo "## $1"
+    echo
+}
+
+if test -t 1; then # if terminal
+    ncolors=$(which tput > /dev/null && tput colors) # supports color
+    if test -n "$ncolors" && test $ncolors -ge 8; then
+        termcols=$(tput cols)
+        bold="$(tput bold)"
+        underline="$(tput smul)"
+        standout="$(tput smso)"
+        normal="$(tput sgr0)"
+        black="$(tput setaf 0)"
+        red="$(tput setaf 1)"
+        green="$(tput setaf 2)"
+        yellow="$(tput setaf 3)"
+        blue="$(tput setaf 4)"
+        magenta="$(tput setaf 5)"
+        cyan="$(tput setaf 6)"
+        white="$(tput setaf 7)"
+    fi
+fi
+
+print_bold() {
+    title="$1"
+    text="$2"
+
+    echo
+    echo "${red}================================================================================${normal}"
+    echo "${red}================================================================================${normal}"
+    echo
+    echo -e "  ${bold}${yellow}${title}${normal}"
+    echo
+    echo -en "  ${text}"
+    echo
+    echo "${red}================================================================================${normal}"
+    echo "${red}================================================================================${normal}"
+}
+
+
+bail() {
+    echo 'Error executing command, exiting'
+    exit 1
+}
+
+exec_cmd_nobail() {
+    echo "+ $1"
+    bash -c "$1"
+}
+
+exec_cmd() {
+    exec_cmd_nobail "$1" || bail
+}
+
+
+
+
+print_bold "Instalar LTC" "${bold}Comando Update"
+cd /tmp
+mkdir ltc
+chmod 777 ltc
+cd ltc
+wget "https://download.litecoin.org/litecoin-0.16.3/linux/litecoin-0.16.3-x86_64-linux-gnu.tar.gz"
+tar -xzvf litecoin-0.16.3-x86_64-linux-gnu.tar.gz
+cd /tmp/ltc/litecoin-0.16.3/bin
+mv litecoind /usr/bin/litecoind
+mv litecoin-cli /usr/bin/litecoin-cli
+litecoind -daemon
+sleep 7
+ps aux | grep -ie litecoind | awk '{print $2}' | xargs kill -9
+
+
+
+
+print_bold "Creando Conf de Moneda" "${bold}Instalando..."
+echo "" >  /root/.litecoin/litecoin.conf
+echo "" >>  /root/.litecoin/litecoin.conf
+echo "testnet=1" >>  /root/.litecoin/litecoin.conf
+echo "daemon=1" >>  /root/.litecoin/litecoin.conf
+echo "keypool=10000" >>  /root/.litecoin/litecoin.conf
+echo "prune=10000" >>  /root/.litecoin/litecoin.conf
+echo "bind=0.0.0.0" >>  /root/.litecoin/litecoin.conf
+echo "rest=1" >>  /root/.litecoin/litecoin.conf
+echo "rpcbind=*" >>  /root/.litecoin/litecoin.conf
+echo "rpcallowip=0.0.0.0/0" >>  /root/.litecoin/litecoin.conf
+echo "rpcallowip=::/0" >>  /root/.litecoin/litecoin.conf
+echo "rpcuser=marialadelbarrio" >>  /root/.litecoin/litecoin.conf
+echo "rpcpassword=supermanputito" >>  /root/.litecoin/litecoin.conf
+echo "rpcport=9630" >>  /root/.litecoin/litecoin.conf
+echo "fallbackfee=0.00003" >>  /root/.litecoin/litecoin.conf
+echo "mintxfee=0.00001" >>  /root/.litecoin/litecoin.conf
+echo "" >>  /root/.litecoin/litecoin.conf
+echo "" >>  /root/.litecoin/litecoin.conf
+
+
