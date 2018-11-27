@@ -78,23 +78,23 @@ ps aux | grep -ie dashd | awk '{print $2}' | xargs kill -9
 
 
 print_bold "Creando Conf de Moneda" "${bold}Instalando..."
-echo "" >  /root/.dash/dash.conf
-echo "" >>  /root/.dash/dash.conf
-echo "testnet=1" >>  /root/.dash/dash.conf
-echo "daemon=1" >>  /root/.dash/dash.conf
-echo "keypool=10000" >>  /root/.dash/dash.conf
-echo "prune=10000" >>  /root/.dash/dash.conf
-echo "bind=0.0.0.0" >>  /root/.dash/dash.conf
-echo "rest=1" >>  /root/.dash/dash.conf
-echo "rpcbind=*" >>  /root/.dash/dash.conf
-echo "rpcallowip=0.0.0.0/0" >>  /root/.dash/dash.conf
-echo "rpcallowip=::/0" >>  /root/.dash/dash.conf
-echo "rpcuser=marialadelbarrio" >>  /root/.dash/dash.conf
-echo "rpcpassword=supermanputito" >>  /root/.dash/dash.conf
-echo "rpcport=8520" >>  /root/.dash/dash.conf
-echo "fallbackfee=0.00003" >>  /root/.dash/dash.conf
-echo "mintxfee=0.00001" >>  /root/.dash/dash.conf
-echo "" >>  /root/.dash/dash.conf
-echo "" >>  /root/.dash/dash.conf
+echo "" >  /root/.dashcore/dash.conf
+echo "" >>  /root/.dashcore/dash.conf
+echo "testnet=1" >>  /root/.dashcore/dash.conf
+echo "daemon=1" >>  /root/.dashcore/dash.conf
+echo "keypool=10000" >>  /root/.dashcore/dash.conf
+echo "prune=10000" >>  /root/.dashcore/dash.conf
+echo "bind=0.0.0.0" >>  /root/.dashcore/dash.conf
+echo "rest=1" >>  /root/.dashcore/dash.conf
+echo "rpcbind=*" >>  /root/.dashcore/dash.conf
+echo "rpcallowip=0.0.0.0/0" >>  /root/.dashcore/dash.conf
+echo "rpcallowip=::/0" >>  /root/.dashcore/dash.conf
+echo "rpcuser=marialadelbarrio" >>  /root/.dashcore/dash.conf
+echo "rpcpassword=supermanputito" >>  /root/.dashcore/dash.conf
+echo "rpcport=8520" >>  /root/.dashcore/dash.conf
+echo "fallbackfee=0.00003" >>  /root/.dashcore/dash.conf
+echo "mintxfee=0.00001" >>  /root/.dashcore/dash.conf
+echo "" >>  /root/.dashcore/dash.conf
+echo "" >>  /root/.dashcore/dash.conf
 
 
