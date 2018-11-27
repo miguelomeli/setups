@@ -61,10 +61,10 @@ exec_cmd() {
 
 
 print_bold "Actualizamos el Sistema" "${bold}Comando Update"
-exec_cmd 'apt-get update -y'
+apt-get update -y
 
 print_bold "Actualizamos el Sistema" "${bold}Comando upgrade"
-exec_cmd 'apt-get upgrade -y'
+apt-get upgrade -y
 
 print_bold "Instalamos Librerias Necesarias" "${bold}Instalando..."
 sudo apt-get install -y nano curl git wget vnstat vnstati lsb-release zip cron sudo unzip nscd netcat software-properties-common
