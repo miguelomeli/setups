@@ -1,0 +1,35 @@
+#!/bin/bash
+
+echo "Actualizamos el Sistema"
+apt-get update -y
+
+echo "Actualizamos el Sistema"
+apt-get upgrade -y
+
+echo "Instalamos Librerias Necesarias..."
+sudo apt-get install -y nano curl git wget vnstat vnstati lsb-release zip cron sudo unzip nscd netcat software-properties-common supervisor
+
+echo "Creando Profile..."
+echo "" >>  ~/.bash_profile
+echo "alias ll='ls -l --color=auto'" >>  ~/.bash_profile
+
+echo "Mofificando /etc/ssh/ssh_config..."
+echo "" >>  /etc/ssh/ssh_config
+echo "" >>  /etc/ssh/ssh_config
+echo "Host *" >>  /etc/ssh/ssh_config
+echo "TCPKeepAlive yes" >>  /etc/ssh/ssh_config
+echo "ServerAliveInterval 20" >>  /etc/ssh/ssh_config
+echo "" >>  /etc/ssh/ssh_config
+
+echo "Mofificando /etc/ssh/sshd_config..."
+echo "" >>  /etc/ssh/sshd_config
+echo "" >>  /etc/ssh/sshd_config
+echo "TCPKeepAlive yes" >>  /etc/ssh/sshd_config
+echo "ClientAliveInterval 60" >>  /etc/ssh/sshd_config
+echo "" >>  /etc/ssh/sshd_config
+
+echo "Reiniciando SSH..."
+/etc/init.d/ssh restart
+
+
+
