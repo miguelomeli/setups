@@ -31,5 +31,8 @@ echo "" >>  /etc/ssh/sshd_config
 echo "Reiniciando SSH..."
 /etc/init.d/ssh restart
 
+echo "Generando llaves ssh";
+ssh-keygen -t rsa -b 4096 -C "miguel@lomeli.io"
 
 
+#curl -sL https://raw.githubusercontent.com/miguelomeli/setups/master/inicial | sudo -E bash -
