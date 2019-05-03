@@ -31,6 +31,9 @@ echo "" >>  /etc/ssh/sshd_config
 echo "Reiniciando SSH..."
 /etc/init.d/ssh restart
 
+echo "Creando Directorio...";
+mkdir -p /home/lomeli/
+
 echo "Generando llaves ssh";
 ssh-keygen -t rsa -b 4096 -C "miguel@lomeli.io"
 
