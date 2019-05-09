@@ -124,7 +124,6 @@ mysql -u root -p < /home/lomeli/tmp/local.sql
 
 
 
-
-#curl -sL /home/lomeli/tmp/install_2.sh | sudo -E bash -
+#curl -sL https://raw.githubusercontent.com/miguelomeli/setups/master/lomeli | sudo -E bash -
 
 
