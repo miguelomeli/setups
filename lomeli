@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+ 
 echo "Install PHP"
 sudo apt-get install php-fpm php-mysql
 echo "cgi.fix_pathinfo=0" >>  /etc/php/7.2/fpm/php.ini
