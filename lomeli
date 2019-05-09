@@ -1,42 +1,6 @@
 #!/bin/bash
 
 
-echo "Install Nginx"
-sudo apt install nginx net-tools samba -y
-
-
-echo "Check Nginx"
-sudo systemctl status nginx
-
-
-echo "Start Nginx"
-sudo systemctl start nginx
-
-
-echo "Configurando Nginx"
-ln -s /home/lomeli/confs/nginx /etc/nginx/sites-enabled/nginx
-rm /etc/nginx/sites-enabled/default
-chmod 777 /home/lomeli/streams
-service nginx -t
-service nginx reload
-
-echo "Install MariaDB"
-sudo apt install mariadb-server mariadb-client
-
-
-echo "Check MariaDB"
-sudo systemctl status mysql
-
-echo "Setup database administrative user (root) password"
-mysql_secure_installation
-
-
-#sudo mysql -u root
-#use mysql;
-#update user set plugin='' where User='root';
-#flush privileges;
-#\q
-
 echo "Install PHP"
 sudo apt-get install php-fpm php-mysql
 echo "cgi.fix_pathinfo=0" >>  /etc/php/7.2/fpm/php.ini
